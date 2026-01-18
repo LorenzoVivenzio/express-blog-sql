@@ -5,6 +5,7 @@ const router = express.Router();
 // index
 router.get("/", blogController.index)
 // show
+router.get("/:id", blogController.show)
 // store
 // update
 // modify
