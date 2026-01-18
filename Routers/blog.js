@@ -9,5 +9,6 @@ router.get("/", blogController.index)
 // update
 // modify
 // delete
+router.delete("/:id", blogController.destroy)
 
 export default router;
