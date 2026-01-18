@@ -1,4 +1,6 @@
 import connection from "../data/db.js";
+
+
 // index
 function index(req, res) {
     const query = "SELECT * FROM `posts`"
@@ -9,6 +11,31 @@ function index(req, res) {
         res.json(results)
     });
 }
+
+// show
+function show(req, res) {
+
+    const id = req.params.id;
+
+    const query = "SELECT * FROM `posts` WHERE id = ?"
+    connection.query(sql, [id], (err, results) => {
+        if (err) return res.status(500)
+            .json({ error: 'Database query failed' });
+        if (results.length === 0) 
+            return res.status(404)
+        .json({ error: 'Post not found' });
+        res.json(results[0]);
+    });
+
+
+
+}
+
+
+
+
+
+
 
 // destroy
 
@@ -21,7 +48,7 @@ function destroy(req, res) {
     connection.query(query, [id], (err) => {
         if (err)
             return res.status(500)
-                .json({ error: 'Failed to delete pizza' });
+                .json({ error: 'Failed to delete post' });
         res.sendStatus(204)
     })
 
